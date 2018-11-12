@@ -1,0 +1,8 @@
+.gragle
+build/
+
+ # Ignore Gradle GUI config
+ gradle-app.setting
+
+ # Avoid ingroring Gradle wrapper jar file (.jar files are usually igored)
+ !gradle-wrapper.jar

@@ -6,3 +6,4 @@ build/
 
  # Avoid ingroring Gradle wrapper jar file (.jar files are usually igored)
  !gradle-wrapper.jar
+.idea/workspace.xml

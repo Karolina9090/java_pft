@@ -13,6 +13,9 @@ public class MyFirstProgram {
     Rectangle r = new Rectangle(4, 6);
     System.out.println("Powierzchnia prostokątu o bokach " + r.a + " i " + r.b + " = " + r.area());
 
+    Point p1 = new Point(4, 0);
+    Point p2 = new Point(-4, 0);
+    System.out.println("Odległość między punktami: " + p1.distance(p2));
   }
 
   public static void hello(String somebody) {

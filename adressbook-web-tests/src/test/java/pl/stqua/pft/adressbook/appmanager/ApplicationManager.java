@@ -4,10 +4,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class ApplicationManager {
   FirefoxDriver wd;
 
+  private ContactHelpers contactHelpers;
   private SessionHelper sessionHelper;
   private NavitagionHelper navitagionHelper;
   private GroupHelpers groupHelpers;
@@ -19,11 +19,11 @@ public class ApplicationManager {
     groupHelpers = new GroupHelpers(wd);
     navitagionHelper = new NavitagionHelper(wd);
     sessionHelper = new SessionHelper(wd);
+    contactHelpers = new ContactHelpers(wd);
     sessionHelper.login("admin", "secret");
   }
 
-  public void stop() {
-    wd.quit();
+  public void stop() { wd.quit();
   }
 
   public GroupHelpers getGroupHelpers() {
@@ -34,4 +34,6 @@ public class ApplicationManager {
     return navitagionHelper;
   }
 
+
+  public ContactHelpers getContactHelpers() { return contactHelpers;  }
 }

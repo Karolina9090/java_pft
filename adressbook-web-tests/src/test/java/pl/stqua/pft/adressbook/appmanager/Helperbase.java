@@ -21,6 +21,16 @@ public class Helperbase {
     wd.findElement(locator).sendKeys(text);
   }
 
+  protected void clickOn(By locator) {
+    wd.findElement(locator).click();
+  }
+
+  protected void typeOn(By locator, String text) {
+    clickOn(locator);
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
+  }
+
   private boolean isAlertPresent() {
     try {
       wd.switchTo().alert();

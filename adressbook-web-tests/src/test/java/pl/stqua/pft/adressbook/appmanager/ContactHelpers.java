@@ -31,4 +31,13 @@ public class ContactHelpers extends Helperbase {
     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getNew_group());
   }
 
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void initContactModification() { click(By.name("edit"));
+  }
+
+  public void submitContactModification() { click(By.name("update"));
+  }
 }

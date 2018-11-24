@@ -35,9 +35,21 @@ public class ContactHelpers extends Helperbase {
     click(By.name("selected[]"));
   }
 
-  public void initContactModification() { click(By.name("edit"));
+  public void initContactModification() {
+    click(By.name("edit"));
   }
 
-  public void submitContactModification() { click(By.name("update"));
+  public void submitContactModification() {
+    click(By.name("update"));
   }
+
+  public void deleteSelectedContact() {
+    click(By.xpath("(//input[@value='Delete'])"));
+  }
+
+  public void confirmDeleteSelectedContact() {
+    click(By.name("OK"));
+  }
+
 }
+

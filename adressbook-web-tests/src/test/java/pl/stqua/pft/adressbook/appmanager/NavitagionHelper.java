@@ -18,4 +18,8 @@ public class NavitagionHelper extends Helperbase {
   public void goToAddNewContact() {
     click(By.linkText("add new"));
   }
+
+  public void goToHomePage() {
+      click(By.linkText("home"));
+    }
 }

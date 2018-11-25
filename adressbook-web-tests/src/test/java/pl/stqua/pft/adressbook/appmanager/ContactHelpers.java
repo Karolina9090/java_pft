@@ -1,13 +1,14 @@
 package pl.stqua.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import pl.stqua.pft.adressbook.model.ContactData;
 
 public class ContactHelpers extends Helperbase {
 
-  public ContactHelpers(FirefoxDriver wd) {
+  public ContactHelpers(WebDriver wd) {
     super(wd);
   }
 

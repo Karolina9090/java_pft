@@ -2,12 +2,13 @@ package pl.stqua.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Helperbase {
-  protected FirefoxDriver wd;
+  protected WebDriver wd;
 
-  public Helperbase(FirefoxDriver wd) {
+  public Helperbase(WebDriver wd) {
     this.wd = wd;
   }
 

@@ -1,13 +1,14 @@
 package pl.stqua.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavitagionHelper extends Helperbase {
 
   private FirefoxDriver wd;
 
-  public NavitagionHelper(FirefoxDriver wd) {
+  public NavitagionHelper(WebDriver wd) {
     super(wd);
   }
 

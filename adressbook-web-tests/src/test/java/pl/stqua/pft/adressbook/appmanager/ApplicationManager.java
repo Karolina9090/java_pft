@@ -24,7 +24,7 @@ public class ApplicationManager {
   public void init() {
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.FIREFOX_CHROME)) {
+    } else if (browser.equals(BrowserType.GOOGLECHROME)) {
       wd = new ChromeDriver();
     } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();

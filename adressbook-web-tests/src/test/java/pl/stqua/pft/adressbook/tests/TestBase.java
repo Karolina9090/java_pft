@@ -8,7 +8,7 @@ import pl.stqua.pft.adressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX_CHROME);
+  protected final ApplicationManager app = new ApplicationManager(BrowserType.GOOGLECHROME);
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {

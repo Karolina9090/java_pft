@@ -2,7 +2,6 @@ package pl.stqua.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import pl.stqua.pft.adressbook.model.GroupData;
 
 public class GroupHelpers extends Helperbase {

@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.stqua.pft.adressbook.model.ContactData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,16 +19,11 @@ public class ContactCreationTests extends TestBase {
     List<ContactData> after = app.getContactHelpers().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    int max = 0;
-    for (ContactData g : after) {
-      if (g.getId(max) > max) {
-        max = g.getId(max);
-      }
-    }
-    contact.getId(max);
     before.add(contact);
-    before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super ContactData> byID = (g1, g2) -> Integer.compare(g1.getId(0), g2.getId(0));
+    before.sort(byID);
+    after.sort(byID);
+    Assert.assertEquals(before, after);
   }
 
 }

@@ -12,6 +12,16 @@ public class ContactData {
   private final String email;
   private String group;
 
+  public ContactData(String firstname, String lastname, String adress, String home, String email, String group) {
+    this.id = Integer.MAX_VALUE;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.adress = adress;
+    this.home = home;
+    this.email = email;
+    this.group = group;
+  }
+
   public ContactData(int id, String firstname, String lastname, String adress, String home, String email, String group) {
     this.id = id;
     this.firstname = firstname;
@@ -23,37 +33,12 @@ public class ContactData {
   }
 
 
-  public ContactData(String firstname, String lastname, String adress, String home, String email, String group) {
-    this.id = 0;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.adress = adress;
-    this.home = home;
-    this.email = email;
-    this.group = group;
-  }
-
   public int getId(int id) {
     return id;
   }
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
   }
 
   public void setGroup(String group) {
@@ -93,4 +78,20 @@ public class ContactData {
             ", lastname='" + lastname + '\'' +
             '}';
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstname, lastname);
+  }
+
+
 }

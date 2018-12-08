@@ -72,6 +72,14 @@ public class ContactHelpers extends Helperbase {
     returnToHomePage();
   }
 
+
+  public void modifyContact(int index, ContactData contact) {
+    selectContact(index);
+    initContactModification();
+    fillContactForm(contact, false);
+    submitContactModification();
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -85,7 +93,6 @@ public class ContactHelpers extends Helperbase {
     List<WebElement> elements = wd.findElements(By.xpath("/html/body/div[1]/div[4]/form[2]/table/tbody/tr[2]"));
     for (WebElement element : elements) {
       String name = element.getText();
-//      String firstname = elements.get(2).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       ContactData contact = new ContactData(name, name, null, null, null, null);
     contacts.add(contact);
@@ -93,9 +100,3 @@ public class ContactHelpers extends Helperbase {
     return contacts;
   }
 }
-
-// 1. Get a list of all the rows of the contact table (elements named "entry")
-//
-//2. For each row use "element.findElements" to get a list of cells (elements with the tag "td")
-//
-//3. Take the text from the cells (like "String firstname = cells.get(2).getText()")

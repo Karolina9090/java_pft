@@ -6,12 +6,11 @@ import pl.stqua.pft.adressbook.model.ContactData;
 
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testContactModification() {
     app.getContactHelpers().goToHomePage();
     if (!app.getContactHelpers().isThereAContact()) {

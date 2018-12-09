@@ -26,8 +26,6 @@ public class ContactHelpers extends Helperbase {
 
   public void fillContactForm(ContactData contactData, boolean creation) {
     typeOn(By.name("firstname"), contactData.getFirstname());
-    clickOn(By.name("middlename"));
-    clickOn(By.name("middlename"));
     typeOn(By.name("lastname"), contactData.getLastname());
     typeOn(By.name("address"), contactData.getAdress());
     typeOn(By.name("home"), contactData.getHome());
@@ -66,7 +64,8 @@ public class ContactHelpers extends Helperbase {
     click(By.linkText("home"));
   }
 
-  public void create(ContactData contact, boolean b) {
+  public void
+  create(ContactData contact, boolean b) {
     fillContactForm(contact, b);
     submitContactCreation();
     returnToHomePage();
@@ -101,8 +100,7 @@ public class ContactHelpers extends Helperbase {
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(name, name, null, null, null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstname(name).withLastname(name));
     }
     return contacts;
   }

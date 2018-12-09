@@ -10,7 +10,7 @@ public class NavitagionHelper extends Helperbase {
     super(wd);
   }
 
-  public void goToGroupPage() {
+  public void groupPage() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Groups")
             && isElementPresent(By.name("new"))) {
@@ -20,15 +20,13 @@ public class NavitagionHelper extends Helperbase {
   }
 
   public void goToAddNewContact() {
-//    if (isElementPresent(By.tagName("h1"))
-//      && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry"))
     if (isElementPresent(By.id("Edit / add address book entry"))) {
       return;
     }
     click(By.linkText("add new"));
   }
 
-  public void goToHomePage() {
+  public void homePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }

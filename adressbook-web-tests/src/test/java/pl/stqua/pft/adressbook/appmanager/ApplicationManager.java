@@ -17,7 +17,7 @@ public class ApplicationManager {
   private GroupHelpers groupHelpers;
   private String browser;
 
-  public ApplicationManager (String browser) {
+  public ApplicationManager(String browser) {
     this.browser = browser;
   }
 
@@ -42,16 +42,16 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public GroupHelpers getGroupHelpers() {
+  public GroupHelpers group() {
     return groupHelpers;
   }
 
-  public NavitagionHelper getNavitagionHelper() {
+  public NavitagionHelper goTo() {
     return navitagionHelper;
   }
 
 
-  public ContactHelpers getContactHelpers() {
+  public ContactHelpers contact() {
     return contactHelpers;
   }
 }

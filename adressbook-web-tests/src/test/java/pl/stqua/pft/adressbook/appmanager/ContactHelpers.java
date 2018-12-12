@@ -28,7 +28,7 @@ public class ContactHelpers extends Helperbase {
     typeOn(By.name("firstname"), contactData.getFirstname());
     typeOn(By.name("lastname"), contactData.getLastname());
     typeOn(By.name("address"), contactData.getAdress());
-    typeOn(By.name("home"), contactData.getHome());
+    typeOn(By.name("home"), contactData.getHomePhone());
     typeOn(By.name("email"), contactData.getEmail());
 
     if (creation) {
@@ -108,5 +108,24 @@ public class ContactHelpers extends Helperbase {
       contactCache.add(new ContactData().withId(id).withFirstname(name).withLastname(name));
     }
     return new Contacts(contactCache);
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId(28));
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement((By.name("lastname"))).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId(28)).withFirstname(firstname).withLastname(lastname)
+            .withHome(home).withMobilePhone(mobile).withWorkPhone(work);
+  }
+
+  private void initContactModificationById(int id) {
+    WebElement checbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(7).findElement(By.tagName("a")).click();
   }
 }

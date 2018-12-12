@@ -100,7 +100,10 @@ public class ContactData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
+    int result = id;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    return result;
   }
 
 

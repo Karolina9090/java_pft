@@ -8,7 +8,9 @@ import org.testng.Assert;
 import pl.stqua.pft.adressbook.model.ContactData;
 import pl.stqua.pft.adressbook.model.Contacts;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelpers extends Helperbase {
 
@@ -108,6 +110,21 @@ public class ContactHelpers extends Helperbase {
       contactCache.add(new ContactData().withId(id).withFirstname(name).withLastname(name));
     }
     return new Contacts(contactCache);
+  }
+
+  public Set<ContactData>app() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
+    List<WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      String[] phones = cells.get(5).getText().split("\n");
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withWorkPhone(phones[0]).withMobilePhone(phones[1]).withHome(phones[2]));
+    }
+    return contacts;
   }
 
   public ContactData infoFromEditForm(ContactData contact) {

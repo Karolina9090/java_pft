@@ -57,7 +57,7 @@ public class GroupHelpers extends Helperbase {
   }
 
   public void modify(GroupData group) {
-    selectGroupById(group.getId(28));
+    selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
@@ -66,7 +66,7 @@ public class GroupHelpers extends Helperbase {
   }
 
   public void delete(GroupData group) {
-    selectGroupById(group.getId(36));
+    selectGroupById(group.getId());
     deleteSelectedGroup();
     groupCache = null;
     returnToGroupPage();

@@ -74,7 +74,7 @@ public class ContactHelpers extends Helperbase {
 
 
   public void modify(ContactData contact) {
-    selectContactById(contact.getId(40));
+    selectContactById(contact.getId());
     initContactModification();
     fillContactForm(contact, false);
     contactCache = null;
@@ -82,7 +82,7 @@ public class ContactHelpers extends Helperbase {
   }
 
   public void delete(ContactData contact) {
-    selectContactById(contact.getId(40));
+    selectContactById(contact.getId());
     deleteSelectedContact();
     contactCache = null;
     confirmDeleteSelectedContact();
@@ -128,14 +128,14 @@ public class ContactHelpers extends Helperbase {
   }
 
   public ContactData infoFromEditForm(ContactData contact) {
-    initContactModificationById(contact.getId(28));
+    initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement((By.name("lastname"))).getAttribute("value");
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
-    return new ContactData().withId(contact.getId(28)).withFirstname(firstname).withLastname(lastname)
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
             .withHome(home).withMobilePhone(mobile).withWorkPhone(work);
   }
 

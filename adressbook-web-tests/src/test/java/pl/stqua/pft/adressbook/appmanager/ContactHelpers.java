@@ -112,7 +112,7 @@ public class ContactHelpers extends Helperbase {
     return new Contacts(contactCache);
   }
 
-  public Set<ContactData>all() {
+  public Set<ContactData>list() {
     Set<ContactData> contacts = new HashSet<ContactData>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
     for (WebElement row : rows) {

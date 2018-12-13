@@ -19,6 +19,10 @@ public class ContactData {
     this.allPhones = allPhones;
   }
 
+  public void setWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+  }
+
   public String getAllPhones() {
     return allPhones;
   }

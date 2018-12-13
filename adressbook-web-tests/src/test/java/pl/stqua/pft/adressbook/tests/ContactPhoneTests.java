@@ -32,4 +32,16 @@ public class ContactPhoneTests extends TestBase {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 
+
+  @Test
+  public void OnDetailsContactPage() {
+    app.goTo().homePage();
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactInfoFromDetailsForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromDetailsForm)));
+  }
+
+
+
 }

@@ -12,7 +12,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class HomeAdressTests extends TestBase {
 
   @Test
-
   public void HomeAdress() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
@@ -23,7 +22,7 @@ public class HomeAdressTests extends TestBase {
 
   private String mergeAdress(ContactData contact) {
     return Arrays.asList(contact.getHomeAdress())
-            .stream().filter((s) -> ! s.equals(""))
+            .stream().filter((s) -> !s.equals(""))
             .map(HomeAdressTests::cleaned)
             .collect(Collectors.joining("\n"));
   }
@@ -31,4 +30,14 @@ public class HomeAdressTests extends TestBase {
   public static String cleaned(String homeAdress) {
     return homeAdress.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
+
+  @Test
+  public void HomeAdressOnDetailsContactPage() {
+    app.goTo().homePage();
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactInfoFromDetailsForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getAllHomeAdress(), equalTo(mergeAdress(contactInfoFromDetailsForm)));
+  }
+
 }

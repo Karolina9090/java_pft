@@ -11,9 +11,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class EmailAdressTests extends TestBase {
 
-  @Test
-
-public void EmailAdress() {
+  @Test(enabled = false)
+  public void EmailAdress() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -30,6 +29,15 @@ public void EmailAdress() {
 
   public static String cleaned(String emailAdress) {
     return emailAdress.replaceAll("\\s", "").replaceAll("[-()]", "");
+  }
+
+  @Test
+  public void EmailAdressOnDetailsContactPage() {
+    app.goTo().homePage();
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);
+
+    assertThat(contact.getAllEmailAdress(), equalTo(mergeEmailAdress(contactInfoFromDetailsForm)));
   }
 
 }

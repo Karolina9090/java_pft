@@ -14,13 +14,27 @@ public class ContactData {
   private String mobilePhone;
   private String workPhone;
   private String allPhones;
+  private String allHomeAdress;
+  private String allEmailAdress;
+  private String homeAdress;
+  private String emailAdress;
 
-  public void setAllPhones(String allPhones) {
-    this.allPhones = allPhones;
+  public ContactData withAllEmailAdress(String allEmailAdress) {
+    this.allEmailAdress = allEmailAdress;
+    return this;
   }
 
-  public void setWorkPhone(String workPhone) {
-    this.workPhone = workPhone;
+  public String getAllEmailAdress() {
+    return allEmailAdress;
+  }
+
+  public ContactData withAllHomeAdress(String allHomeAdress) {
+    this.allHomeAdress = allHomeAdress;
+    return this;
+  }
+
+  public String getAllHomeAdress() {
+    return allHomeAdress;
   }
 
   public String getAllPhones() {
@@ -100,6 +114,14 @@ public class ContactData {
     return homePhone;
   }
 
+  public String getHomeAdress() {
+    return homeAdress;
+  }
+
+  public String getEmailAdress() {
+    return emailAdress;
+  }
+
   public String getMobilePhone() {
     return mobilePhone;
   }
@@ -143,4 +165,5 @@ public class ContactData {
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
+
 }

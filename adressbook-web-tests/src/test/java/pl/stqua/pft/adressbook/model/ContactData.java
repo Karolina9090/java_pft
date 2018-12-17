@@ -18,6 +18,8 @@ public class ContactData {
   private String allEmailAdress;
   private String homeAdress;
   private String emailAdress;
+  private String emailAdress2;
+  private String emailAdress3;
 
   public ContactData withAllEmailAdress(String allEmailAdress) {
     this.allEmailAdress = allEmailAdress;
@@ -110,17 +112,22 @@ public class ContactData {
     return adress;
   }
 
-  public String getHomePhone() {
-    return homePhone;
+  public String getHomePhone() { return homePhone;
   }
 
   public String getHomeAdress() {
     return homeAdress;
   }
 
-  public String getEmailAdress() {
-    return emailAdress;
+  public String getEmailAdress() { return emailAdress;
   }
+
+  public String getEmailAdress2() { return emailAdress2;
+  }
+
+  public String getEmailAdress3() { return emailAdress3;
+  }
+
 
   public String getMobilePhone() {
     return mobilePhone;

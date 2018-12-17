@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
 
-  @BeforeMethod
+  @BeforeMethod(enabled = false)
   public void ensurePreconditions() {
     app.contact().homePage();
     if (app.contact().all().size() == 40) {

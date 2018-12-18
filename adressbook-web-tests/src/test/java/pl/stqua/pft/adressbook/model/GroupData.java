@@ -1,5 +1,6 @@
 package pl.stqua.pft.adressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class GroupData {
@@ -8,6 +9,7 @@ public class GroupData {
   private String name;
   private String header;
   private String footer;
+  private File photo;
 
   public GroupData withId(int id) {
     this.id = id;
@@ -26,6 +28,15 @@ public class GroupData {
 
   public GroupData withFooter(String footer) {
     this.footer = footer;
+    return this;
+  }
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public GroupData withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 

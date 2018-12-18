@@ -21,6 +21,7 @@ public class ContactData {
   private String emailAdress;
   private String emailAdress2;
   private String emailAdress3;
+  private File photo;
 
   public File getPhoto() {
     return photo;
@@ -30,8 +31,6 @@ public class ContactData {
     this.photo = photo;
     return this;
   }
-
-  private File photo;
 
   public ContactData withAllEmailAdress(String allEmailAdress) {
     this.allEmailAdress = allEmailAdress;
@@ -124,7 +123,8 @@ public class ContactData {
     return adress;
   }
 
-  public String getHomePhone() { return homePhone;
+  public String getHomePhone() {
+    return homePhone;
   }
 
   public String getHomeAdress() {
@@ -146,13 +146,16 @@ public class ContactData {
     return this;
   }
 
-  public String getEmailAdress() { return emailAdress;
+  public String getEmailAdress() {
+    return emailAdress;
   }
 
-  public String getEmailAdress2() { return emailAdress2;
+  public String getEmailAdress2() {
+    return emailAdress2;
   }
 
-  public String getEmailAdress3() { return emailAdress3;
+  public String getEmailAdress3() {
+    return emailAdress3;
   }
 
 

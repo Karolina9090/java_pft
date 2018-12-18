@@ -26,6 +26,7 @@ public class GroupHelpers extends Helperbase {
     type(By.name("group_name"), groupData.getName());
     type(By.name("group_header"), groupData.getHeader());
     type(By.name("group_footer"), groupData.getFooter());
+    attach(By.name("photo"), groupData.getPhoto());
   }
 
   public void initGroupCreation() {

@@ -4,12 +4,14 @@ import org.testng.annotations.*;
 import pl.stqua.pft.adressbook.model.GroupData;
 import pl.stqua.pft.adressbook.model.Groups;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTest extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testGroupCreation() {
     app.goTo().groupPage();
     Groups before = app.group().all();
@@ -22,7 +24,7 @@ public class GroupCreationTest extends TestBase {
 
   }
 
-  @Test
+  @Test(enabled = false)
   public void testBadGroupCreation() {
     app.goTo().groupPage();
     Groups before = app.group().all();
@@ -32,6 +34,16 @@ public class GroupCreationTest extends TestBase {
     Groups after = app.group().all();
     assertThat(after,equalTo(before));
 
+  }
+
+  @Test
+  public void testGroupCreation2() {
+    app.goTo().groupPage();
+    File photo = new File("src/test/resources/bombka2.jpg");
+    app.group().fillGroupForm(
+            new GroupData().withName("test2").withPhoto(photo));
+    app.group().submitGroupCreation();
+    app.group().returnToGroupPage();
   }
 
 }

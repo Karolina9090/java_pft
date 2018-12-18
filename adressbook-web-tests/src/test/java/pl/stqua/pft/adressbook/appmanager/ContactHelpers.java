@@ -138,10 +138,13 @@ public class ContactHelpers extends Helperbase {
     String work = wd.findElement(By.name("work")).getAttribute("value");
     String homeAdress = wd.findElement(By.name("address")).getAttribute("value");
     String emailAdress = wd.findElement(By.name("email")).getAttribute("value");
+    String emailAdress2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String emailAdress3 = wd.findElement(By.name("email3")).getAttribute("value");
+
 
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withHome(home).withMobilePhone(mobile).withWorkPhone(work).withAllHomeAdress(homeAdress).withAllEmailAdress(emailAdress);
+            .withHome(home).withMobilePhone(mobile).withWorkPhone(work).withAllHomeAdress(homeAdress).withAllEmailAdress(emailAdress).withEmailAdress(emailAdress).withEmailAdress2(emailAdress2).withEmailAdress3(emailAdress3);
   }
 
   private void initContactModificationById(int id) {
@@ -160,6 +163,7 @@ public class ContactHelpers extends Helperbase {
     String work = wd.findElement(By.xpath("/html/body/div/div[4]/br[5]")).getAttribute("value");
     String homeAdress = wd.findElement(By.xpath("/html/body/div/div[4]/br[1]")).getAttribute("value");
     String emailAdress = wd.findElement(By.xpath("/html/body/div/div[4]/a")).getAttribute("value");
+
 
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)

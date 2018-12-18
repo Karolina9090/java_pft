@@ -119,6 +119,21 @@ public class ContactData {
     return homeAdress;
   }
 
+  public ContactData withEmailAdress(String emailAdress) {
+    this.emailAdress = emailAdress;
+    return this;
+  }
+
+  public ContactData withEmailAdress2(String emailAdress2) {
+    this.emailAdress2 = emailAdress2;
+    return this;
+  }
+
+  public ContactData withEmailAdress3(String emailAdress3) {
+    this.emailAdress3 = emailAdress3;
+    return this;
+  }
+
   public String getEmailAdress() { return emailAdress;
   }
 

@@ -32,12 +32,7 @@ public class ContactHelpers extends Helperbase {
     typeOn(By.name("address"), contactData.getAdress());
     typeOn(By.name("home"), contactData.getHomePhone());
     typeOn(By.name("email"), contactData.getEmail());
-
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+    attach(By.name("photo"), contactData.getPhoto());
 
   }
 

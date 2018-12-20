@@ -43,7 +43,7 @@ public class ContactCreationTests extends TestBase {
     }
     XStream xstream = new XStream();
     xstream.processAnnotations(GroupData.class);
-    List<ContactData> contacts = (List<ContactData>)xstream.fromXML(xml);
+    List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
     return contacts.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
   }
 

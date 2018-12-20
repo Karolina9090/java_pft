@@ -4,9 +4,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.stqua.pft.adressbook.model.ContactData;
 import pl.stqua.pft.adressbook.model.Contacts;
-import pl.stqua.pft.adressbook.model.GroupData;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,11 +30,15 @@ public class ContactCreationTests extends TestBase {
 
 
   @DataProvider
-  public Iterator<Object[]> validContacts() {
+  public Iterator<Object[]> validContacts() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[]{new ContactData().withFirstname("test1").withLastname("test2").withAdress("0000000001").withHome("test3").withEmail("test@test1")});
-    list.add(new Object[]{new ContactData().withFirstname("test2").withLastname("test3").withAdress("0000000002").withHome("test4").withEmail("test@test2")});
-    list.add(new Object[]{new ContactData().withFirstname("test3").withLastname("test4").withAdress("0000000003").withHome("test5").withEmail("test@test3")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+    String line = reader.readLine();
+    while (line != null) {
+      String[] split = line.split(";");
+      list.add(new Object[] {new ContactData().withFirstname(split[0]).withLastname(split[1]).withAdress(split[2]).withHome(split[3]).withEmail(split[4])});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
 
@@ -49,7 +52,7 @@ public class ContactCreationTests extends TestBase {
     assertThat(after, equalTo(before));
   }
 
-  @Test
+  @Test(enabled = false)
   public void testContactCreation2() {
     app.goTo().goToAddNewContact();
     File photo = new File("src/test/resources/bombka2.jpg");

@@ -8,10 +8,4 @@
             <class name="pl.stqua.pft.adressbook.tests.GroupDeletionTests" />
         </classes>
     </test>
-
-    <test name="Contacts">
-        <classes>
-            <class name="pl.stqua.pft.adressbook.tests.ContactCreationTests"/>
-        </classes>
-    </test>
 </suite>

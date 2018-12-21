@@ -12,3 +12,16 @@ dependencies {
     compile 'com.thoughtworks.xstream:xstream:1.4.11.1'
     compile 'com.google.code.gson:gson:2.8.5'
 }
+
+task testGroups(tpe: Test) {
+    useTestNG {
+        suites 'src/test/resources/teting-groups.xml'
+    }
+}
+
+task testContacts(tpe: Test) {
+    useTestNG
+    useTestNG {
+        suites 'src/test/resources/teting-contacts.xml'
+    }
+}

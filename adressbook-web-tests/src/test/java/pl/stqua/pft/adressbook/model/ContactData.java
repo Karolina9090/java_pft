@@ -5,10 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
@@ -30,40 +27,60 @@ public class ContactData {
   @Column(name = "adress")
   private String adress;
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String homePhone;
   @Expose
   @Column(name = "email")
   private String email;
   @Expose
-  private String group;
+  @Transient
+  transient private String group;
   @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
   @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String workPhone;
   @Expose
-  private String allPhones;
+  @Transient
+  transient private String allPhones;
   @Expose
-  private String allHomeAdress;
+  @Transient
+  transient private String allHomeAdress;
   @Expose
-  private String allEmailAdress;
+  @Transient
+  transient private String allEmailAdress;
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String homeAdress;
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String emailAdress;
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String emailAdress2;
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String emailAdress3;
   @Expose
-  private File photo;
+  @Column
+  @Type(type = "text")
+  private String photo;
 
   @Type(type = "text")
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -212,15 +229,6 @@ public class ContactData {
 
 
   @Override
-  public String toString() {
-    return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            '}';
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -237,5 +245,15 @@ public class ContactData {
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            '}';
+  }
+
 
 }

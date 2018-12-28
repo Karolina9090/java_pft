@@ -14,7 +14,7 @@
 
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 
-    <property name="connection.url">"jdbc:mysql://localhost:3306/addressbook</property>
+    <property name="connection.url">"jdbc:mysql://localhost:3306/addressbook?serverTimezone=UTC</property>
 
     <property name="connection.username">root</property>
 
@@ -49,6 +49,7 @@
 
 
     <mapping class="pl.stqua.pft.adressbook.model.GroupData"/>
+    <mapping class="pl.stqua.pft.adressbook.model.ContactData"/>
 
 </session-factory>
 

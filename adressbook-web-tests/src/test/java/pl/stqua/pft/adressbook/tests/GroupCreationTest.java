@@ -3,8 +3,6 @@ package pl.stqua.pft.adressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import pl.stqua.pft.adressbook.model.GroupData;
 import pl.stqua.pft.adressbook.model.Groups;
@@ -84,6 +82,26 @@ public class GroupCreationTest extends TestBase {
             new GroupData().withName("test2").withPhoto(photo));
     app.group().submitGroupCreation();
     app.group().returnToGroupPage();
+  }
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test1"));
+    }
+  }
+
+  @Test(enabled = false)
+  public void testGroupCreation3() {
+    app.goTo().groupPage();
+    Groups before = app.db().groups();
+    GroupData group = new GroupData().withName("test2");
+    app.group().create(group);
+    assertThat(app.group().count(), equalTo(before.size() + 1));
+    Groups after = app.db().groups();
+    assertThat(after, equalTo(
+            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
 

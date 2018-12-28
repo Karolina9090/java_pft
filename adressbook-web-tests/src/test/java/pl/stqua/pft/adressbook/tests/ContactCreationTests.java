@@ -3,8 +3,7 @@ package pl.stqua.pft.adressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.stqua.pft.adressbook.model.ContactData;
@@ -89,4 +88,24 @@ public class ContactCreationTests extends TestBase {
     app.contact().returnToHomePage();
   }
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().goToAddNewContact();
+      app.contact().create(new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test"), true);
+    }
+  }
+
+  @Test
+  public void testContactCreation3() {
+    app.goTo().goToAddNewContact();
+    Contacts before = app.db().contacts();
+    File photo = new File("src/test/resources/bombka2.jpg");
+    ContactData contact = new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo);
+    app.contact().create(contact, false);
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
 }

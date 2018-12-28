@@ -229,24 +229,6 @@ public class ContactData {
 
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    return result;
-  }
-
-  @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
@@ -255,5 +237,33 @@ public class ContactData {
             '}';
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(adress, that.adress) &&
+            Objects.equals(homePhone, that.homePhone) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(group, that.group) &&
+            Objects.equals(mobilePhone, that.mobilePhone) &&
+            Objects.equals(workPhone, that.workPhone) &&
+            Objects.equals(allPhones, that.allPhones) &&
+            Objects.equals(allHomeAdress, that.allHomeAdress) &&
+            Objects.equals(allEmailAdress, that.allEmailAdress) &&
+            Objects.equals(homeAdress, that.homeAdress) &&
+            Objects.equals(emailAdress, that.emailAdress) &&
+            Objects.equals(emailAdress2, that.emailAdress2) &&
+            Objects.equals(emailAdress3, that.emailAdress3) &&
+            Objects.equals(photo, that.photo);
+  }
+
+  @Override
+  public int hashCode() {
+    return 0;
+  }
 
 }

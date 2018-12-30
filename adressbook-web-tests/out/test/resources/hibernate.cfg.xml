@@ -7,7 +7,7 @@
         -<hibernate-configuration>
 
 
-    <session-factory>  = configuration.buildSessionFactory();
+    <session-factory> = configuration.buildSessionFactory();
 
     <!-- Database connection settings -->
 

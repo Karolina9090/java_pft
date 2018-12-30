@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import pl.stqua.pft.adressbook.model.ContactData;
 import pl.stqua.pft.adressbook.model.Contacts;
 import pl.stqua.pft.adressbook.model.GroupData;
+import pl.stqua.pft.adressbook.model.Groups;
 
 import java.io.*;
 import java.util.Iterator;
@@ -80,33 +81,36 @@ public class ContactCreationTests extends TestBase {
 
   @Test(enabled = false)
   public void testContactCreation2() {
-    app.goTo().goToAddNewContact();
-    File photo = new File("src/test/resources/bombka2.jpg");
-    app.contact().fillContactForm(
-            new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo), true);
-    app.contact().submitContactCreation();
-    app.contact().returnToHomePage();
-  }
-
-  @BeforeMethod
-  public void ensurePreconditions() {
-    if (app.db().contacts().size() == 0) {
+      Groups groups = app.db().groups();
+      File photo = new File("src/test/resources/bombka2.jpg");
+      ContactData newContact = new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo)
+              .inGroup(groups.iterator().next());
       app.goTo().goToAddNewContact();
-      app.contact().create(new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test"), true);
+      app.contact().fillContactForm(
+              new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo), true);
+      app.contact().submitContactCreation();
+      app.contact().returnToHomePage();
+    }
+
+    @BeforeMethod
+    public void ensurePreconditions () {
+      if (app.db().contacts().size() == 0) {
+        app.goTo().goToAddNewContact();
+        app.contact().create(new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test"), true);
+      }
+    }
+
+    @Test
+    public void testContactCreation3 () {
+      app.goTo().goToAddNewContact();
+      Contacts before = app.db().contacts();
+      File photo = new File("src/test/resources/bombka2.jpg");
+      ContactData contact = new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo);
+      app.contact().create(contact, false);
+      assertThat(app.contact().count(), equalTo(before.size() + 1));
+      Contacts after = app.db().contacts();
+      assertThat(after, equalTo(
+              before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+      verifyContactListUI();
     }
   }
-
-  @Test
-  public void testContactCreation3() {
-    app.goTo().goToAddNewContact();
-    Contacts before = app.db().contacts();
-    File photo = new File("src/test/resources/bombka2.jpg");
-    ContactData contact = new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo);
-    app.contact().create(contact, false);
-    assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.db().contacts();
-    assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    verifyContactListUI();
-  }
-}

@@ -79,15 +79,14 @@ public class ContactCreationTests extends TestBase {
     assertThat(after, equalTo(before));
   }
 
-  @Test(enabled = false)
+  @Test
   public void testContactCreation2() {
       Groups groups = app.db().groups();
       File photo = new File("src/test/resources/bombka2.jpg");
       ContactData newContact = new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo)
               .inGroup(groups.iterator().next());
       app.goTo().goToAddNewContact();
-      app.contact().fillContactForm(
-              new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo), true);
+      app.contact().fillContactForm(newContact, true);
       app.contact().submitContactCreation();
       app.contact().returnToHomePage();
     }

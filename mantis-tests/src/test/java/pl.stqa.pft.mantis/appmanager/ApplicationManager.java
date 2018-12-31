@@ -1,4 +1,4 @@
-package pl.stqa.pft.mantis.tests.appmanager;
+package pl.stqa.pft.mantis.appmanager;
 
 
 import org.openqa.selenium.WebDriver;
@@ -31,7 +31,7 @@ public class ApplicationManager {
 
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.GOOGLECHROME)) {
+    } else if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
     } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
@@ -43,5 +43,13 @@ public class ApplicationManager {
 
   public void stop() {
     wd.quit();
+  }
+
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
   }
 }

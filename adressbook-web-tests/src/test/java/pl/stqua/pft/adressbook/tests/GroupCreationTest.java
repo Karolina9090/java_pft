@@ -73,6 +73,17 @@ public class GroupCreationTest extends TestBase {
     assertThat(after, equalTo(before));
   }
 
+  @Test(dataProvider = "validGroupsFromJson")
+  public void testCorrectGroupCreation(GroupData group) {
+    app.goTo().groupPage();
+    Groups before = app.group().all();
+    app.group().create(group);
+    assertThat(app.group().count(), equalTo(before.size()));
+    Groups after = app.group().all();
+    assertThat(after, equalTo(before));
+    verifyGroupListDB();
+  }
+
 
   @Test(enabled = false)
   public void testGroupCreation2() {

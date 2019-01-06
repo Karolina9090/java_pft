@@ -71,4 +71,27 @@ public class TestBase {
               .collect(Collectors.toSet())));
     }
   }
+
+
+  public void verifyGroupListDB() {
+    if (Boolean.getBoolean("verifyDB")) {
+      Groups uiGroups = app.group().all();
+      Groups dbGroups = app.db().groups();
+      assertThat(dbGroups, equalTo(uiGroups.stream()
+      .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()).withFooter(g.getFooter()).withHeader(g.getHeader()))
+              .collect(Collectors.toSet())));
+    }
+
+  }
+
+  public void verifyContactListDB() {
+    if (Boolean.getBoolean("verify DB")) {
+      Contacts uiContacts = app.contact().all();
+      Contacts dbContacts = app.db().contacts();
+      assertThat(dbContacts, equalTo(uiContacts.stream()
+              .map((c) -> new ContactData().withId(c.getId()).withFirstname(c.getFirstname()).withLastname(c.getLastname()))
+              .collect(Collectors.toSet())));
+    }
+  }
+
 }

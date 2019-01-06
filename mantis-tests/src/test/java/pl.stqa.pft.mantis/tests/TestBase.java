@@ -1,6 +1,9 @@
 package pl.stqa.pft.mantis.tests;
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pl.stqa.pft.mantis.appmanager.ApplicationManager;
@@ -9,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class TestBase {
+  protected WebDriver wd;
 
 
   protected static final ApplicationManager app
@@ -25,5 +29,4 @@ public class TestBase {
     app.ftp().restore("config_inc.php.bak", "config_inc.php");
     app.stop();
   }
-
 }

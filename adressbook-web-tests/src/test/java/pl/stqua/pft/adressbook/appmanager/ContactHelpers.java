@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.stqua.pft.adressbook.model.ContactData;
 import pl.stqua.pft.adressbook.model.Contacts;
+import pl.stqua.pft.adressbook.model.GroupData;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,9 +36,9 @@ public class ContactHelpers extends Helperbase {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      if (ContactData.getGroups().size() > 0) {
+      if (contactData.getGroups().size() > 0) {
         Assert.assertTrue(contactData.getGroups().size() == 1);
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
       }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -85,6 +86,13 @@ public class ContactHelpers extends Helperbase {
   }
 
   public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    deleteSelectedContact();
+    contactCache = null;
+    confirmDeleteSelectedContact();
+  }
+
+  public void deleteContact(GroupData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
     contactCache = null;

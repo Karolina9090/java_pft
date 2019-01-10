@@ -92,7 +92,7 @@ public class ContactCreationTests extends TestBase {
 
 
   @Test
-  public void testContactCreation2() {
+  public void testAddGroupToContact() {
       Groups groups = app.db().groups();
       File photo = new File("src/test/resources/bombka2.jpg");
       ContactData newContact = new ContactData().withFirstname("test1").withLastname("test2").withAdress("000000000").withHome("test3").withEmail("test@test").withPhoto(photo)
@@ -112,7 +112,7 @@ public class ContactCreationTests extends TestBase {
     }
 
     @Test
-    public void testContactCreation3 () {
+    public void testContactCreation2() {
       app.goTo().goToAddNewContact();
       Contacts before = app.db().contacts();
       File photo = new File("src/test/resources/bombka2.jpg");

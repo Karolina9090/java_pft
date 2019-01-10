@@ -33,13 +33,6 @@ public class GroupData {
   @Expose
   private File photo;
 
-  @ManyToMany(mappedBy = "groups")
-  private Set<ContactData> contacts = new HashSet<ContactData>();
-
-  public Set<ContactData> getContacts() {
-    return contacts;
-  }
-
   public GroupData withId(int id) {
     this.id = id;
     return this;
@@ -89,6 +82,14 @@ public class GroupData {
     return footer;
   }
 
+
+  @ManyToMany(mappedBy = "groups")
+  private Set<ContactData> contacts = new HashSet<ContactData>();
+
+  public Contacts getContacts() {
+    return new Contacts(contacts);
+  }
+
   @Override
   public String toString() {
     return "GroupData{" +
@@ -112,5 +113,15 @@ public class GroupData {
   @Override
   public int hashCode() {
     return 0;
+  }
+
+  public GroupData inContact(ContactData contact) {
+    contacts.add(contact);
+    return this;
+  }
+
+  public GroupData inDeletedContacts(ContactData contact) {
+    contacts.remove(contact);
+    return this;
   }
 }

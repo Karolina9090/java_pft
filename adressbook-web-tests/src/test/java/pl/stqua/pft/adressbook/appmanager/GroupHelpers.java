@@ -3,6 +3,8 @@ package pl.stqua.pft.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pl.stqua.pft.adressbook.model.GroupData;
 import pl.stqua.pft.adressbook.model.Groups;
 
@@ -22,11 +24,20 @@ public class GroupHelpers extends Helperbase {
     click(By.name("submit"));
   }
 
-  public void fillGroupForm(GroupData groupData) {
+  public void fillGroupForm(GroupData groupData, boolean creation) {
     type(By.name("group_name"), groupData.getName());
     type(By.name("group_header"), groupData.getHeader());
     type(By.name("group_footer"), groupData.getFooter());
     attach(By.name("photo"), groupData.getPhoto());
+
+    if (creation) {
+      if (groupData.getContacts().size() > 0) {
+        Assert.assertTrue(groupData.getContacts().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupData.getContacts().iterator().next().getFirstname());
+      }
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void initGroupCreation() {
@@ -51,7 +62,7 @@ public class GroupHelpers extends Helperbase {
 
   public void create(GroupData group) {
     initGroupCreation();
-    fillGroupForm(group);
+    fillGroupForm(group, true);
     submitGroupCreation();
     groupCache = null;
     returnToGroupPage();
@@ -60,7 +71,7 @@ public class GroupHelpers extends Helperbase {
   public void modify(GroupData group) {
     selectGroupById(group.getId());
     initGroupModification();
-    fillGroupForm(group);
+    fillGroupForm(group, true);
     submitGroupModification();
     groupCache = null;
     returnToGroupPage();
@@ -71,7 +82,6 @@ public class GroupHelpers extends Helperbase {
     deleteSelectedGroup();
     groupCache = null;
     returnToGroupPage();
-
   }
 
 

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
+import pl.stqua.pft.adressbook.model.Contacts;
 import pl.stqua.pft.adressbook.model.GroupData;
 import pl.stqua.pft.adressbook.model.Groups;
 
@@ -90,7 +91,7 @@ public class GroupCreationTest extends TestBase {
     app.goTo().groupPage();
     File photo = new File("src/test/resources/bombka2.jpg");
     app.group().fillGroupForm(
-            new GroupData().withName("test2").withPhoto(photo));
+            new GroupData().withName("test2").withPhoto(photo), true);
     app.group().submitGroupCreation();
     app.group().returnToGroupPage();
   }
@@ -114,6 +115,17 @@ public class GroupCreationTest extends TestBase {
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     verifyGroupListUI();
+  }
+
+  @Test
+  public void testAddContactToGroup() {
+    Contacts contacts = app.db().contacts();
+    File photo = new File("src/test/resources/bombka2.jpg");
+    GroupData newGroup = new GroupData().withName("test2").withPhoto(photo)
+            .inContact(contacts.iterator().next());
+    app.group().fillGroupForm(newGroup, true);
+    app.group().submitGroupCreation();
+    app.group().returnToGroupPage();
   }
 
 

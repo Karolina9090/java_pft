@@ -78,11 +78,6 @@ public class ContactData {
     return new File(photo);
   }
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(name = "address_in_groups,",
-          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
-  private static Set<GroupData> groups = new HashSet<GroupData>();
-
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
@@ -256,7 +251,13 @@ public class ContactData {
             Objects.equals(photo, that.photo);
   }
 
-  public static Groups getGroups() {
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
+
+  public Groups getGroups() {
     return new Groups(groups);
   }
 
@@ -269,4 +270,5 @@ public class ContactData {
     groups.add(group);
     return this;
   }
+
 }

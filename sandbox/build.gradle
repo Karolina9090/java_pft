@@ -9,7 +9,3 @@ repositories {
 dependencies {
     compile 'org.testng:testng:6.14.3'
 }
-
-test {
-	useTstNG()
-}

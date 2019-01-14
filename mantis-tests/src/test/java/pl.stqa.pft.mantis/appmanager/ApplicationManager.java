@@ -23,6 +23,7 @@ public class ApplicationManager {
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
   private SoapHelper soapHelper;
+  private ChangePasswordHelper changePasswordHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -53,6 +54,13 @@ public class ApplicationManager {
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
+  }
+
+  public ChangePasswordHelper changingPassword() {
+    if (changePasswordHelper == null) {
+      changePasswordHelper = new ChangePasswordHelper(this);
+    }
+    return changePasswordHelper;
   }
 
   public FtpHelper ftp() {

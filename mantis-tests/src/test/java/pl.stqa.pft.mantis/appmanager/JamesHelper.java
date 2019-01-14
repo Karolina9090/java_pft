@@ -51,6 +51,12 @@ public class JamesHelper {
     closeTelnetSession();
   }
 
+  public void changeUserPassword(String password) {
+    initTelnetSession();
+    write("updprefs " + password);
+    String result = readUntil("User " + password + " updated");
+    closeTelnetSession();
+  }
 
   private void initTelnetSession() {
     mailserver = app.getProperty("mailserver.host");

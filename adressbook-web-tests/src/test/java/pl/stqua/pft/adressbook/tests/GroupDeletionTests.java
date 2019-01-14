@@ -54,4 +54,13 @@ public class GroupDeletionTests extends TestBase {
     app.group().submitGroupCreation();
     app.group().returnToGroupPage();
   }
+
+  @Test
+  public void testDeleteExistingContactToExistingGroup() {
+    Groups groups = app.group().all();
+    GroupData deletedContactFromGroup = groups.iterator().next();
+    app.group().deleteContact(deletedContactFromGroup);
+    app.group().returnToGroupPage();
+  }
+
 }

@@ -128,5 +128,13 @@ public class GroupCreationTest extends TestBase {
     app.group().returnToGroupPage();
   }
 
+  @Test
+  public void testAddExistingContactToExistingGroup() {
+    Groups groups = app.group().all();
+    GroupData addedContactToGroup = groups.iterator().next();
+    app.group().addContact(addedContactToGroup);
+    app.group().returnToGroupPage();
+  }
+
 
 }

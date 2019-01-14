@@ -56,6 +56,14 @@ public class GroupHelpers extends Helperbase {
     click(By.name("edit"));
   }
 
+  public void initAddingContactToGroup() {
+    click(By.name("add"));
+  }
+
+  public void initDeleteContactFromGroup() {
+    click(By.name("remove"));
+  }
+
   public void submitGroupModification() {
     click(By.name("update"));
   }
@@ -107,6 +115,18 @@ public class GroupHelpers extends Helperbase {
       groupCache.add(new GroupData().withId(id).withName(name));
     }
     return new Groups(groupCache);
+  }
+
+  public void addContact(GroupData addedContactToGroup) {
+    selectGroupById(addedContactToGroup.getId());
+    initAddingContactToGroup();
+    groupCache = null;
+  }
+
+  public void deleteContact(GroupData deletedContactFromGroup) {
+    selectGroupById(deletedContactFromGroup.getId());
+    initDeleteContactFromGroup();
+    groupCache = null;
   }
 
 }

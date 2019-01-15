@@ -27,37 +27,6 @@ public class ContactHelpers extends Helperbase {
     clickOn(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public Contacts all() {
-    if (contactCache != null) {
-      return new Contacts(contactCache);
-    }
-    contactCache = new Contacts();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.contact"));
-    for (WebElement element : elements) {
-      String name = element.getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstname(name).withLastname(name));
-    }
-    return new Contacts(contactCache);
-  }
-
-  public Set<ContactData> list() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
-    List<WebElement> rows = wd.findElements(By.name("entry"));
-    for (WebElement row : rows) {
-      List<WebElement> cells = row.findElements(By.tagName("td"));
-      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-      String lastname = cells.get(1).getText();
-      String firstname = cells.get(2).getText();
-      String allPhones = cells.get(5).getText();
-      String allHomeAdress = cells.get(3).getText();
-      String allEmailAdress = cells.get(4).getText();
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allPhones).withAllHomeAdress(allHomeAdress).withAllEmailAdress(allEmailAdress));
-    }
-    return contacts;
-  }
-
   public void fillContactForm(ContactData contactData, boolean creation) {
     typeOn(By.name("firstname"), contactData.getFirstname());
     typeOn(By.name("lastname"), contactData.getLastname());

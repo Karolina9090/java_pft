@@ -51,10 +51,10 @@ public class JamesHelper {
     closeTelnetSession();
   }
 
-  public void changeUserPassword(String password) {
+  public void changeUserPassword(String passwords) {
     initTelnetSession();
-    write("updprefs " + password);
-    String result = readUntil("User " + password + " updated");
+    write("updprefs " + passwords);
+    String result = readUntil("User " + passwords + " updated");
     closeTelnetSession();
   }
 

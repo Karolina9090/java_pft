@@ -11,6 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase {
 
+
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().groups().size() == 28) {
@@ -18,7 +19,6 @@ public class GroupModificationTests extends TestBase {
       app.group().create(new GroupData().withName("test1"));
     }
   }
-
   @Test
   public void testGroupModification() {
     Groups before = app.db().groups();

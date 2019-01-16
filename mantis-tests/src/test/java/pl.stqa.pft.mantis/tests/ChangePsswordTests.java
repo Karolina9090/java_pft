@@ -1,6 +1,8 @@
 package pl.stqa.pft.mantis.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pl.stqa.pft.mantis.appmanager.HttpSession;
 import pl.stqa.pft.mantis.model.MailMessage;
 import ru.lanwen.verbalregex.VerbalExpression;
 
@@ -12,23 +14,26 @@ import static org.testng.Assert.assertTrue;
 
 public class ChangePsswordTests extends TestBase {
 
+
   public void startMailServer() {
     app.mail().start();
   }
 
-  @Test
+  @BeforeMethod
+  public void ensurePreconditions()  throws IOException {
+    HttpSession session = app.newSession();
+    assertTrue(session.login("administrator", "root"));
+    assertTrue(session.isLoggedInAs("administrator"));
+  }
 
-  public void testChanePasswordTests()   throws IOException, MessagingException, InterruptedException {
-    long now = System.currentTimeMillis();
-    String user  = String.format("user%s" + now);
-    String password = "password";
-    String email = String.format("user1%s@localhost.localdomain", now);
-    app.james().changeUserPassword(password);
+  @Test
+  public void testChangePasswordTests(String passwords, String user, String email)   throws IOException, MessagingException, InterruptedException {
+    app.james().changeUserPassword(passwords);
     app.changingPassword().start(user, email);
-    List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
+    List<MailMessage> mailMessages = app.james().waitForMail(user, passwords, 60000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
-    app.changingPassword().finish(confirmationLink, password);
-    assertTrue(app.newSession().login(user, password));
+    app.changingPassword().finish(confirmationLink, passwords);
+    assertTrue(app.newSession().login(user, passwords));
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {

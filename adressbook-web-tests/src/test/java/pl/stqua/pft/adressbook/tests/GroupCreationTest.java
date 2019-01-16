@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
+import pl.stqua.pft.adressbook.model.ContactData;
 import pl.stqua.pft.adressbook.model.Contacts;
 import pl.stqua.pft.adressbook.model.GroupData;
 import pl.stqua.pft.adressbook.model.Groups;
@@ -102,7 +103,13 @@ public class GroupCreationTest extends TestBase {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
     }
+    if (app.db().contacts().size() == 0) {
+      app.contact().homePage();
+      app.contact().create(new ContactData().withFirstname("Test2").withLastname("Test 3").withAdress("000000000").withEmail("tests@tests.com").withHome("test1"), true);
+    }
   }
+
+
 
   @Test(enabled = false)
   public void testGroupCreation3() {
@@ -130,10 +137,15 @@ public class GroupCreationTest extends TestBase {
 
   @Test
   public void testAddExistingContactToExistingGroup() {
+    Contacts before = app.contact().all();
+    ContactData createdContact = before.iterator().next();
     Groups groups = app.group().all();
     GroupData addedContactToGroup = groups.iterator().next();
     app.group().addContact(addedContactToGroup);
-    app.group().returnToGroupPage();
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
+    Groups after = app.group().all();
+    assertThat(after, equalTo(before.without(createdContact)));
+    verifyGroupListDB();
   }
 
 

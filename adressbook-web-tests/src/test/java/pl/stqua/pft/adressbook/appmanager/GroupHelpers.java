@@ -121,12 +121,14 @@ public class GroupHelpers extends Helperbase {
     selectGroupById(addedContactToGroup.getId());
     initAddingContactToGroup();
     groupCache = null;
+    returnToGroupPage();
   }
 
   public void deleteContact(GroupData deletedContactFromGroup) {
     selectGroupById(deletedContactFromGroup.getId());
     initDeleteContactFromGroup();
     groupCache = null;
+    returnToGroupPage();
   }
 
 }
